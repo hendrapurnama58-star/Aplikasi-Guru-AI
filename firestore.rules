@@ -1,0 +1,41 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default fallback rule allowing read and write for all documents
+    match /{document=**} {
+      allow read, write: if true;
+    }
+
+    // Explicit match rules for all application collections
+    match /data_siswa/{docId} {
+      allow read, write: if true;
+    }
+    match /mapel/{docId} {
+      allow read, write: if true;
+    }
+    match /jadwal/{docId} {
+      allow read, write: if true;
+    }
+    match /log_absensi/{docId} {
+      allow read, write: if true;
+    }
+    match /data_nilai/{docId} {
+      allow read, write: if true;
+    }
+    match /jurnal_agenda/{docId} {
+      allow read, write: if true;
+    }
+    match /siswa_bimbingan/{docId} {
+      allow read, write: if true;
+    }
+    match /bimbingan_wali/{docId} {
+      allow read, write: if true;
+    }
+    match /pengaturan/{docId} {
+      allow read, write: if true;
+    }
+  }
+}
+
+
