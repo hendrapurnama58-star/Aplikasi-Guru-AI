@@ -9,7 +9,7 @@ dotenv.config();
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
   app.use(express.json({ limit: "10mb" }));
 
@@ -88,7 +88,7 @@ async function startServer() {
   app.post("/api/auth/login", async (req, res) => {
     try {
       const { username, password } = req.body || {};
-      let validUsername = process.env.AUTH_USERNAME || "www.yefriharyanto.id";
+      let validUsername = process.env.AUTH_USERNAME || "Admin";
       let validPassword = process.env.AUTH_PASSWORD || "123456";
 
       // Query Firestore database directly for updated credentials saved in Pengaturan

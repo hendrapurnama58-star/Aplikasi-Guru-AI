@@ -129,7 +129,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
             {/* Username Input */}
             <div className="space-y-1.5">
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-                Username / Alamat Web
+                Username Akses
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -140,7 +140,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="www.yefriharyanto.id"
+                  placeholder="Admin"
                   className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 text-sm transition-all font-medium"
                 />
               </div>

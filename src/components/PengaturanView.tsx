@@ -22,7 +22,7 @@ export const PengaturanView: React.FC<PengaturanViewProps> = ({ config, onNaviga
     Tempat_Tanda_Tangan: "",
     Logo_Kiri: "https://lh3.googleusercontent.com/d/19TVwFRIp_t7sHTMntziM9SgZVoJAkhQU",
     Logo_Kanan: "https://lh3.googleusercontent.com/d/19TVwFRIp_t7sHTMntziM9SgZVoJAkhQU",
-    username: "www.yefriharyanto.id",
+    username: "Admin",
     password: "123456"
   });
 
@@ -39,7 +39,7 @@ export const PengaturanView: React.FC<PengaturanViewProps> = ({ config, onNaviga
         Tempat_Tanda_Tangan: config.Tempat_Tanda_Tangan || "",
         Logo_Kiri: config.Logo_Kiri || "https://lh3.googleusercontent.com/d/19TVwFRIp_t7sHTMntziM9SgZVoJAkhQU",
         Logo_Kanan: config.Logo_Kanan || "https://lh3.googleusercontent.com/d/19TVwFRIp_t7sHTMntziM9SgZVoJAkhQU",
-        username: config.username || "www.yefriharyanto.id",
+        username: config.username || "Admin",
         password: config.password || "123456"
       });
     }
@@ -229,7 +229,7 @@ export const PengaturanView: React.FC<PengaturanViewProps> = ({ config, onNaviga
                   id="username"
                   value={form.username || ""}
                   onChange={handleChange}
-                  placeholder="www.yefriharyanto.id"
+                  placeholder="Admin"
                   className="w-full px-3 py-2 text-xs border rounded-lg bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700 outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>

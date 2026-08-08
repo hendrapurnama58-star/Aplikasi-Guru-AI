@@ -105,7 +105,11 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeCategorySheet, setActiveCategorySheet] = useState<"akademik" | "ai" | "laporan" | null>(null);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    return localStorage.getItem("edadmin_theme") === "dark";
+    const savedTheme = localStorage.getItem("edadmin_theme");
+    if (savedTheme) {
+      return savedTheme === "dark";
+    }
+    return document.documentElement.classList.contains("dark");
   });
   const [isConnected, setIsConnected] = useState(false);
 
