@@ -1,0 +1,22 @@
+# Configuration for Apache XAMPP
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Allow CORS if needed
+  Header set Access-Control-Allow-Origin "*"
+
+  # Route /api request to Node Express backend if running on port 3000
+  <IfModule mod_proxy.c>
+    ProxyRequests Off
+    ProxyPreserveHost On
+    RewriteRule ^api/(.*)$ http://127.0.0.1:3000/api/$1 [P,L]
+  </IfModule>
+
+  # Route Single Page Application (SPA) requests to dist/index.html or index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.html [QSA,L]
+</IfModule>
+
+# Prevent directory browsing
+Options -Indexes

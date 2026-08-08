@@ -32,7 +32,16 @@ Pastikan komputer / laptop Anda telah terinstall **Node.js**:
 
 ---
 
-### 🔹 Metode B: Mengubah Menjadi File Installer Executable (.EXE) Standalone (Electron)
+### 🔹 Metode B: Jalankan di XAMPP (`htdocs`)
+Jika Anda biasa menggunakan XAMPP (Apache):
+1. Ekstrak seluruh folder aplikasi ini ke direktori **`C:\xampp\htdocs\aplikasi-guru`** (atau nama folder sesuai keinginan Anda).
+2. Buka folder tersebut dan klik ganda file **`jalankan-xampp.bat`**.
+3. Script otomatis akan mengunduh paket dependencies, membangun build produksi, dan menyiapkan routing Apache via `.htaccess` / `index.php`.
+4. Buka browser dan akses via Apache XAMPP: **`http://localhost/aplikasi-guru`** atau langsung **`http://localhost:3000`**.
+
+---
+
+### 🔹 Metode C: Mengubah Menjadi File Installer Executable (.EXE) Standalone (Electron)
 Jika Anda ingin membungkus seluruh aplikasi ini menjadi satu file installer `.exe` mandiri (seperti software Windows biasa):
 1. Buka Command Prompt (cmd) di dalam folder aplikasi.
 2. Install pustaka Electron (jika belum ada):
