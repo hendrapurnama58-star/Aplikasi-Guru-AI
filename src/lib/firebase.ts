@@ -10,7 +10,7 @@ import {
   getDocs,
   writeBatch
 } from "firebase/firestore";
-import firebaseConfigData from "../../firebase-applet-config.json";
+import firebaseConfigData from "@/firebase-applet-config.json";
 import { 
   Siswa, 
   Mapel, 
@@ -24,19 +24,19 @@ import {
 } from "../types";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || firebaseConfigData.apiKey,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || firebaseConfigData.authDomain,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || firebaseConfigData.projectId,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || firebaseConfigData.storageBucket,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || firebaseConfigData.messagingSenderId,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || firebaseConfigData.appId
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || firebaseConfigData?.apiKey || "",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || firebaseConfigData?.authDomain || "",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || firebaseConfigData?.projectId || "",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || firebaseConfigData?.storageBucket || "",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || firebaseConfigData?.messagingSenderId || "",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || firebaseConfigData?.appId || ""
 };
 
 // Initialize Firebase
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 // Use explicit firestoreDatabaseId with auto detect long polling for iframe stability
-const dbId = import.meta.env.VITE_FIREBASE_DATABASE_ID || firebaseConfigData.firestoreDatabaseId || "(default)";
+const dbId = import.meta.env.VITE_FIREBASE_DATABASE_ID || firebaseConfigData?.firestoreDatabaseId || "(default)";
 
 // Original Owner & Master Database Security Restriction
 const PRIMARY_DATABASE_ID = "ai-studio-edadminproadmini-69e4b793-99de-48d3-9856-a254bc94afa3";

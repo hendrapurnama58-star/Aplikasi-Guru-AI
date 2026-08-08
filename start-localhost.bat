@@ -50,8 +50,8 @@ echo  Tekan Ctrl+C di jendela ini jika ingin menghentikan server.
 echo ====================================================================
 echo.
 
-:: Buka browser secara otomatis setelah 3 detik
-start "" "http://localhost:3000"
+:: Buka browser secara otomatis setelah server siap (delay 3.5 detik)
+start "" powershell -Command "Start-Sleep -m 3500; Start-Process 'http://localhost:3000'"
 
 :: Jalankan server development
 call npm run dev

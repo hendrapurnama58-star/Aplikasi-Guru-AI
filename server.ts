@@ -1,11 +1,22 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
-import firebaseConfigData from "./firebase-applet-config.json";
 
 dotenv.config();
+
+// Safely load firebase-applet-config.json if present
+let firebaseConfigData: any = {};
+try {
+  const configPath = path.join(process.cwd(), "firebase-applet-config.json");
+  if (fs.existsSync(configPath)) {
+    firebaseConfigData = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+  }
+} catch (e) {
+  console.warn("Notice: Config JSON could not be loaded, using fallback configuration.");
+}
 
 async function startServer() {
   const app = express();
@@ -868,23 +879,55 @@ KETENTUAN LAYOUT HTML:
   });
 
   // Vite middleware setup
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV === "production") {
+    const distPath = path.join(process.cwd(), "dist");
+    if (fs.existsSync(distPath)) {
+      app.use(express.static(distPath));
+      app.get("*", (_req, res) => {
+        const indexPath = path.join(distPath, "index.html");
+        if (fs.existsSync(indexPath)) {
+          res.sendFile(indexPath);
+        } else {
+          res.status(404).send("File index.html tidak ditemukan di folder dist. Silakan jalankan 'npm run build' terlebih dahulu.");
+        }
+      });
+    } else {
+      console.warn("Folder dist/ tidak ditemukan, menjalankan Vite dev server sebagai fallback...");
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      });
+      app.use(vite.middlewares);
+    }
+  } else {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (_req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server EdAdmin Pro running on http://0.0.0.0:${PORT}`);
-  });
+  // Resilient listener with EADDRINUSE handling
+  const listenWithFallback = (currentPort: number) => {
+    const server = app.listen(currentPort, "0.0.0.0", () => {
+      console.log(`\n==================================================`);
+      console.log(`  Server EdAdmin Pro Berhasil Dijalankan!`);
+      console.log(`  Akses Aplikasi di Browser: http://localhost:${currentPort}`);
+      console.log(`==================================================\n`);
+    });
+
+    server.on("error", (err: any) => {
+      if (err.code === "EADDRINUSE") {
+        console.warn(`[WARN] Port ${currentPort} sedang digunakan program lain. Mencoba port ${currentPort + 1}...`);
+        listenWithFallback(currentPort + 1);
+      } else {
+        console.error("Gagal menjalankan server:", err);
+        process.exit(1);
+      }
+    });
+  };
+
+  listenWithFallback(PORT);
 }
 
 startServer().catch((err) => {
