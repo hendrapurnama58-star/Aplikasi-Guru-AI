@@ -24,17 +24,30 @@ Pastikan komputer / laptop Anda telah terinstall **Node.js**:
 
 ## ⚡ Langkah 3: Cara Menjalankan Aplikasi (Sangat Mudah)
 
-### 🔹 Metode A: Pengguna Windows (Otomatis Sekali Klik)
+### 🔹 Metode A: Pengguna Windows (Peluncuran Seperti Aplikasi .EXE)
 1. Buka folder hasil ekstrak aplikasi.
-2. Klik ganda (double-click) pada file **`start-localhost.bat`**.
-3. Script otomatis akan:
-   - Memeriksa instalasi Node.js.
-   - Mengunduh semua pustaka (*dependencies*) secara otomatis saat pertama kali dijalankan.
-   - Membuka browser secara otomatis ke alamat **`http://localhost:3000`**.
+2. Klik ganda (double-click) **`Buat_Pintasan_Desktop.bat`** (cukup sekali di awal). Ini akan membuat ikon pintasan aplikasi di layar Desktop Windows Anda.
+3. Untuk menjalankan aplikasi tanpa jendela hitam Command Prompt, Anda cukup klik ganda ikon **`Jalankan_Aplikasi_Guru.vbs`** atau ikon **Pintasan Desktop** yang dibuat tadi.
+4. Aplikasi akan langsung berjalan secara seamless di background dan membuka halaman **`http://localhost:3000`**.
 
 ---
 
-### 🔹 Metode B: Pengguna Mac / Linux / Terminal
+### 🔹 Metode B: Mengubah Menjadi File Installer Executable (.EXE) Standalone (Electron)
+Jika Anda ingin membungkus seluruh aplikasi ini menjadi satu file installer `.exe` mandiri (seperti software Windows biasa):
+1. Buka Command Prompt (cmd) di dalam folder aplikasi.
+2. Install pustaka Electron (jika belum ada):
+   ```bash
+   npm install --save-dev electron electron-builder
+   ```
+3. Jalankan perintah kompilasi `.exe`:
+   ```bash
+   npm run build:exe
+   ```
+4. File installer `.exe` aplikasi akan otomatis tercipta di dalam folder `dist/` atau `dist-electron/` yang dapat dibagikan dan diinstall di PC Windows mana saja tanpa perlu install Node.js secara terpisah.
+
+---
+
+### 🔹 Metode C: Jalankan via Command Line (Terminal / Mac / Linux)
 1. Buka Terminal dan masuk ke direktori folder aplikasi:
    ```bash
    cd /path/ke/folder/aplikasi
